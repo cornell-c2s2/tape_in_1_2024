@@ -1,0 +1,9 @@
+BEGIN: Sun 12 May 2024 09:13:05 PM UTC
+Creating /scratch/el595/tape_in_1_2024/lvs/tapeins_sp24_tapein1_Interconnect/lvs_results/2024-05-12-21-13-04/tmp/verilog.cells from the following files...
+	/scratch/el595/tape_in_1_2024/verilog/gl/user_proj_example.v
+	/scratch/el595/tape_in_1_2024/verilog/gl/tapeins_sp24_tapein1_Interconnect.v
+[INFO] Changing from /scratch/el595/tape_in_1_2024/gds/tapeins_sp24_tapein1_Interconnect.gds
+	to /scratch/el595/tape_in_1_2024/lvs/tapeins_sp24_tapein1_Interconnect/lvs_results/2024-05-12-21-13-04/tmp/layout.txt
+Hierarchy check for tapeins_sp24_tapein1_Interconnect passed.
+END: Sun 12 May 2024 09:13:21 PM UTC
+Runtime: 0:00:16 (hh:mm:ss)
