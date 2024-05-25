@@ -482,7 +482,7 @@ module cmn_QueueDpath1 (
           .out(deq_msg)
       );
     end else begin : genblk1
-      reg unused = &{1'b0, bypass_mux_sel, 1'b0};
+      wire unused = &{1'b0, bypass_mux_sel, 1'b0};
       assign deq_msg = qstore;
     end
   endgenerate
@@ -618,7 +618,7 @@ module cmn_QueueDpath (
           .out(deq_msg)
       );
     end else begin : genblk1
-      reg unused = 1'b0 & bypass_mux_sel;
+      wire unused = 1'b0 & bypass_mux_sel;
       assign deq_msg = read_data;
     end
   endgenerate
@@ -1143,7 +1143,7 @@ module arbiter_router_Router (
       assign ostream_msg[((noutputs-1)-i)*nbits+:nbits] = payload_msg;
     end
   endgenerate
-  reg unused = &{1'b0, num_free_entries, 1'b0};
+  wire unused = &{1'b0, num_free_entries, 1'b0};
 endmodule
 module crossbars_Blocking (
     recv_msg,
@@ -1449,7 +1449,7 @@ module fixed_point_combinational_ComplexMultiplier (
       wire [1:1] sv2v_tmp_3CA7E;
       assign sv2v_tmp_3CA7E = recv_val;
       always @(*) send_val = sv2v_tmp_3CA7E;
-      reg unused = &{clk, reset};
+      wire unused = &{clk, reset};
     end else if (num_mults == 1) begin : genblk1
       reg [2:0] IDLE = 3'd0;
       reg [2:0] MUL1 = 3'd1;
@@ -1461,7 +1461,7 @@ module fixed_point_combinational_ComplexMultiplier (
       reg [n - 1:0] mul_a;
       reg [n - 1:0] mul_b;
       wire [n - 1:0] mul_c;
-      reg unused = &{IDLE, MUL1, MUL2, MUL3, DONE};
+      wire unused = &{IDLE, MUL1, MUL2, MUL3, DONE};
       always @(posedge clk)
         if (reset) begin
           state <= IDLE;
@@ -1620,7 +1620,7 @@ module fft_pease_helpers_TwiddleGenerator (
         };
         assign twiddle_imaginary[(((SIZE_FFT/2)-1)-i)*BIT_WIDTH+:BIT_WIDTH] = 0;
       end
-      reg unused = &sine_wave_in;
+      wire unused = &sine_wave_in;
     end else begin : genblk1
       genvar m;
       for (m = 0; m < (2 ** STAGE_FFT); m = m + 1) begin : genblk1
@@ -1810,7 +1810,7 @@ module serdes_Deserializer (
       assign recv_rdy = send_rdy;
       assign send_val = recv_val;
       assign send_msg[(N_SAMPLES-1)*BIT_WIDTH+:BIT_WIDTH] = recv_msg;
-      reg unused = {1'b0, clk, reset, 1'b0};
+      wire unused = {1'b0, clk, reset, 1'b0};
     end else begin : genblk1
       wire [N_SAMPLES - 1:0] en_sel;
       DeserializerControl #(
@@ -1943,7 +1943,7 @@ module serdes_Serializer (
       assign recv_rdy = send_rdy;
       assign send_val = recv_val;
       assign send_msg = recv_msg[(N_SAMPLES-1)*BIT_WIDTH+:BIT_WIDTH];
-      reg unused = {1'b0, clk, reset, 1'b0};
+      wire unused = {1'b0, clk, reset, 1'b0};
     end else begin : genblk1
       wire [$clog2(N_SAMPLES) - 1:0] mux_sel;
       wire reg_en;
@@ -2106,7 +2106,12 @@ module tapeins_sp24_tapein1_Interconnect (
     adapter_parity,
     io_oeb,
     io_out,
+`ifdef USE_POWER_PINS
+    vccd1,  // User area 1 1.8V supply
+    vssd1  // User area 1 digital ground
+`endif
 );
+  inout wire vccd1, vssd1;
   input wire clk;
   input wire reset;
   input wire cs;
@@ -2183,7 +2188,7 @@ module tapeins_sp24_tapein1_Interconnect (
   assign input_xbar_recv_msg[16+:16] = router_msg[69-:16];
   assign input_xbar_recv_val[0] = router_val[0];
   assign router_rdy[0] = input_xbar_recv_rdy[0];
-  reg unused_input_xbar = &{1'b0, input_xbar_recv_rdy[1], 1'b0};
+  wire unused_input_xbar = &{1'b0, input_xbar_recv_rdy[1], 1'b0};
   assign input_xbar_recv_msg[0+:16] = 16'b0000000000000000;
   assign input_xbar_recv_val[1] = 1'b0;
   wire [31:0] input_xbar_send_msg;
@@ -2273,7 +2278,7 @@ module tapeins_sp24_tapein1_Interconnect (
   assign arbiter_msg[0+:16] = output_xbar_send_msg[16+:16];
   assign arbiter_val[1] = output_xbar_send_val[0];
   assign output_xbar_send_rdy[0] = arbiter_rdy[1];
-  reg unused_output_xbar = &{1'b0, output_xbar_send_msg[0+:16], output_xbar_send_val[1], arbiter_rdy[1], 1'b0};
+  wire unused_output_xbar = &{1'b0, output_xbar_send_msg[0+:16], output_xbar_send_val[1], arbiter_rdy[1], 1'b0};
   assign output_xbar_send_rdy[1] = 1'b0;
   wire [1:0] output_control_msg;
   wire output_control_rdy;

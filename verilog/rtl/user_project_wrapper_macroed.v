@@ -78,8 +78,8 @@ module user_project_wrapper (
 
   tapeins_sp24_tapein1_Interconnect tapein (
 `ifdef USE_POWER_PINS
-      .VPWR(vccd1),  // User area 1 1.8V supply
-      .VGND(vssd1),  // User area 1 digital ground
+      .vccd1(vccd1),  // User area 1 1.8V supply
+      .vssd1(vssd1),  // User area 1 digital ground
 `endif
       .clk(wb_clk_i),
       .reset(wb_rst_i),
@@ -89,7 +89,7 @@ module user_project_wrapper (
       .mosi(io_in[8]),
       .sclk(io_in[9]),
       .miso(io_out[10]),
-      .io_oeb(io_oeb[22:5]),
+      .io_oeb(io_oeb[22:5])
   );
 
 endmodule  // user_project_wrapper
