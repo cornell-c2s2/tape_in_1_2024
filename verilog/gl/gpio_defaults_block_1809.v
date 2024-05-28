@@ -1,4 +1,4 @@
-module gpio_defaults_block_1803 (VPWR,
+module gpio_defaults_block_1809 (VPWR,
     VGND,
     gpio_defaults);
  input VPWR;
@@ -275,12 +275,12 @@ module gpio_defaults_block_1803 (VPWR,
     .VPB(VPWR),
     .VPWR(VPWR));
  assign gpio_defaults[10] = \gpio_defaults_low[10] ;
- assign gpio_defaults[1] = \gpio_defaults_high[1] ;
+ assign gpio_defaults[1] = \gpio_defaults_low[1] ;
  assign gpio_defaults[0] = \gpio_defaults_high[0] ;
  assign gpio_defaults[11] = \gpio_defaults_high[11] ;
  assign gpio_defaults[12] = \gpio_defaults_high[12] ;
  assign gpio_defaults[2] = \gpio_defaults_low[2] ;
- assign gpio_defaults[3] = \gpio_defaults_low[3] ;
+ assign gpio_defaults[3] = \gpio_defaults_high[3] ;
  assign gpio_defaults[4] = \gpio_defaults_low[4] ;
  assign gpio_defaults[5] = \gpio_defaults_low[5] ;
  assign gpio_defaults[6] = \gpio_defaults_low[6] ;
