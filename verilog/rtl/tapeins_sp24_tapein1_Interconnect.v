@@ -2107,11 +2107,11 @@ module tapeins_sp24_tapein1_Interconnect (
     io_oeb,
     io_out,
 `ifdef USE_POWER_PINS
-    vccd1,  // User area 1 1.8V supply
-    vssd1  // User area 1 digital ground
+    VPWR,  // User area 1 1.8V supply
+    VGND  // User area 1 digital ground
 `endif
 );
-  inout wire vccd1, vssd1;
+  inout wire VPWR, VGND;
   input wire clk;
   input wire reset;
   input wire cs;

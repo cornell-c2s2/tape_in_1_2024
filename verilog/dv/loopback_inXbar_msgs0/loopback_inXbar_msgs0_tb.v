@@ -155,6 +155,9 @@ module loopback_inXbar_msgs0_tb;
   //----------------------------------------------------------------------
 
   initial begin
+    cs = 1'b0;
+    mosi = 1'b0;
+    sclk = 1'b0;
     RSTB <= 1'b0;
     CSB  <= 1'b1;  // Force CSB high
     #2000;
